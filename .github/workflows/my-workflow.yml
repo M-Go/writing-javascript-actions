@@ -6,7 +6,7 @@ name: JS Actions
 
 # Triggers the workflow on push
 on:
-  pullrequest:
+  pull_request:
     types: [labeled]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -26,3 +26,10 @@ jobs:
         
       - name: ha-ha
         uses: ./.github/actions/joke-action
+        id: jokes
+
+      - name: create-issue
+        uses: ./.github/actions/issue-maker
+        with:
+          repo-token: ${{secrets.GITHUB_TOKEN}}
+          joke: ${{steps.jokes.outputs.joke-output}}
