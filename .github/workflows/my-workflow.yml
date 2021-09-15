@@ -5,7 +5,9 @@ name: JS Actions
 # Controls when the workflow will run
 
 # Triggers the workflow on push
-on: [push]
+on:
+  pullrequest:
+    types: [labeled]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,5 +23,6 @@ jobs:
       
       - name: hello-action
         uses: ./.github/actions/hello-world
-        with:
-          first-greeting: "Learning Lab User"
+        
+      - name: ha-ha
+        uses: ./.github/actions/joke-action
